@@ -8,12 +8,13 @@
 // Turn => keeps track of whose turn it is
 // isWinner => represents game's state (tie, winner, or game is ongoing)
 // gameboard => represents the game board
-let turn, isWinner, gameBoard
+let nextTurn, isWinner, gameBoard
 
 
 
 /*------------------------ Cached Element References ------------------------*/
-let gameBoard = document.querySelectorAll()
+let squareArr = document.querySelectorAll(".square")
+let messageInH2 = document.getElementById("message") 
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -21,6 +22,34 @@ let gameBoard = document.querySelectorAll()
 
 
 /*-------------------------------- Functions --------------------------------*/
+// Initialize Function
+
+function init() {
+  let gameBoard = [square0 = null, square1 = null, square2 = null, square3 = null, square4 = null, square5 = null, square6 = null, square7 = null, square8 = null];
+  const players = {
+    "1" : {
+      name: "",
+      score: 0
+    },
+    "-1": {
+      name: "",
+      score: 0
+    }
+  };
+  console.log(gameBoard);
+  winner = null;
+  render();
+}
+init()
+
+function render() { 
+  for (let i = 0; i < squareArr.length; i++){
+    console.log(squareArr[i])
+  }
+  return squareArr[i]
+}
+render()
+
 
 
 /** -------INSTRUCTIONS 
