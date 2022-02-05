@@ -22,12 +22,15 @@ let nextTurn, isWinner, gameBoard
 
 
 /*------------------------ Cached Element References ------------------------*/
-let squareArr = Array.from(document.querySelectorAll(".square"))
-console.log(squareArr)
-let messageInH2 = document.getElementById("message") 
+const squareArr = document.querySelectorAll(".square")
+console.log(squareArr[5])
+const messageInH2 = document.getElementById("message")  
 
 
 /*----------------------------- Event Listeners -----------------------------*/
+squareArr.forEach(square => square.addEventListener("click", handleClick))
+
+
 
 
 
@@ -35,7 +38,7 @@ let messageInH2 = document.getElementById("message")
 // Initialize Function
 
 function init() {
-  gameBoard = [-1, null, null, null, null, null, null, null, null]
+  gameBoard = [null, null, null, null, null, null, null, null, null]
   turn = 1
   winner = null;
   render();
@@ -43,37 +46,22 @@ function init() {
 init()
 
 function render() { 
-  for(let i = 0; i < gameBoard.length; i++) {
-    // console.log(gameBoard[i], gameBoard, i)
-    if (gameBoard[i] === 1) {
-          gameBoard[i].textContent = "X"
-        } else if (gameBoard[i] === -1) {
-          gameBoard[i].textContent= "O"
-        } else if (gameBoard[i] === null) {
-          gameBoard[i].textContent = " "
-        }
-  }
-  if (winner !== null){
-    // Display message for next turn `Take a turn ${nextTurn}`
-  } else if (winner === "T") {
-    //  Display message for a tie "Well look at that! We got us a tie!"
-  } else {
-    // Display message for winner `Congrats, ${winner}! You tic-tac-toe'd your way to a win!`
-  }
-}
-render()
+  gameBoard.forEach((square, index) => {
+    if(gameBoard[index] === 1) {
+      squareArr[index].textContent = "X"
+    } else if(gameBoard[index] === -1) {
+      squareArr[index].textContent = "O"
+    }
+  })}
 
-function handleClick(_squareArr) {
-  // Get the index of the square that is selected
-  // Extract the index from an id assigned to the appropriate <div> in HTML 
-  // Return the id and index once selected, so that the other player cannot select the same square
-  // Change the player's turn by => (turn *= -1)
-  // Set winner variable if there is a winner
-    // Call getWinner function
-  console.log("handleclick invoked")
-}
-handleClick()
+function handleClick(evt) {
+  const index = (evt.target.id.replace("sq", ""))
+  gameBoard[index] = turn
+  console.log(gameBoard)
+  render()
+  }
 
-function getWinner() {
-  console.log("getWinner invoked")
-}
+  function switchTurn() {
+
+  }
+// handleClick()
