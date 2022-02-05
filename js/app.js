@@ -38,6 +38,7 @@ squareArr.forEach(square => square.addEventListener("click", handleClick))
 // Initialize Function
 
 function init() {
+  messageInH2.textContent = "Let's play! Place your mark on the board. The first player to get three in a row horizontally, diagonally, or vertically wins!"
   gameBoard = [null, null, null, null, null, null, null, null, null]
   turn = 1
   winner = null;
@@ -67,15 +68,17 @@ function handleClick(evt) {
     // change the the player after each turn
     // prompt the next player to place their mark on the board
     turn *= -1
-    if(turn === 1){
-      messageInH2.textContent = "Take a turn, Player O"
+    if(turn === -1){
+      messageInH2.textContent = "Let's go, 0!"
     } else {
-      messageInH2.textContent = "Take a turn, Player X"
+      messageInH2.textContent = "X marks the spot!"
     }
   }
 
   function getWinner() {
-    
+    // determine if there is a winner
+    // use a for loop/forEach method looping through the winningCombos array to compare those with the selected squares
+    // determine if there is a tie
   }
 
 
