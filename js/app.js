@@ -23,12 +23,13 @@ let nextTurn, isWinner, gameBoard
 
 /*------------------------ Cached Element References ------------------------*/
 const squareArr = document.querySelectorAll(".square")
-console.log(squareArr[5])
 const messageInH2 = document.getElementById("message")  
+const resetBtn = document.getElementById("reset-btn")
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 squareArr.forEach(square => square.addEventListener("click", handleClick))
+
 
 
 
@@ -40,8 +41,9 @@ squareArr.forEach(square => square.addEventListener("click", handleClick))
 function init() {
   messageInH2.textContent = "Let's play! Place your mark on the board. The first player to get three in a row horizontally, diagonally, or vertically wins!"
   gameBoard = [null, null, null, null, null, null, null, null, null]
+	console.log(gameBoard)
   turn = 1
-  winner = null;
+  isWinner = null;
   render();
 }
 init()
@@ -57,12 +59,20 @@ function render() {
 
 function handleClick(evt) {
   const index = (evt.target.id.replace("sq", ""))
-  gameBoard[index] = turn
-  console.log(gameBoard)
-  render()
-  switchTurn()
-
-  }
+	if(isWinner) {
+		return;
+	}
+	if(gameBoard[index] !== null) {
+		
+		return gameBoard[index]
+	} 
+	gameBoard[index] = turn
+	
+	getWinner()
+	switchTurn()
+	render()
+	
+}
 
   function switchTurn() {
     // change the the player after each turn
@@ -71,15 +81,38 @@ function handleClick(evt) {
     if(turn === -1){
       messageInH2.textContent = "Let's go, 0!"
     } else {
-      messageInH2.textContent = "X marks the spot!"
+      messageInH2.textContent = "X, mark your spot!"
     }
+		getWinner()
   }
 
   function getWinner() {
-    // determine if there is a winner
-    // use a for loop/forEach method looping through the winningCombos array to compare those with the selected squares
-    // determine if there is a tie
-  }
+		const tie = gameBoard.every(elem => {
+			elem !== null})
+   	for(let i = 0; i < winningCombos.length; i++) {
+		if(gameBoard[winningCombos[i][0]] + gameBoard[winningCombos[i][1]] + gameBoard[winningCombos[i][2]] === 3){
+			console.log("X won")
+			isWinner = player1
+			messageInH2.textContent = "Winner winner chicken dinner! Way to go, X"
+		} else if(gameBoard[winningCombos[i][0]] + gameBoard[winningCombos[i][1]] + gameBoard[winningCombos[i][2]] === -3){
+			console.log("O won")
+			isWinner = player2
+			messageInH2.textContent = "Winner winner chicken dinner! Great job, 0"
+		} else if (tie) {
+			console.log("tie")
+			isWinner = "T"
+			messageInH2.textContent = "Hey look! It's a tie"
+		} else{
+				isWinner = null
+		}
+	}
+}
+function replay(evt) {
+	
+}
+			
+
+	
 
 
 
