@@ -29,6 +29,7 @@ const resetBtn = document.getElementById("reset-btn")
 
 /*----------------------------- Event Listeners -----------------------------*/
 squareArr.forEach(square => square.addEventListener("click", handleClick))
+resetBtn.addEventListener("click", replay)
 
 
 
@@ -55,21 +56,20 @@ function render() {
     } else if(gameBoard[index] === -1) {
       squareArr[index].textContent = "O"
     }
-  })}
+  })
+}
 
 function handleClick(evt) {
   const index = (evt.target.id.replace("sq", ""))
 	if(isWinner) {
 		return;
 	}
-	if(gameBoard[index] !== null) {
-		
+	if(gameBoard[index] !== null) {	
 		return gameBoard[index]
 	} 
 	gameBoard[index] = turn
-	
-	getWinner()
 	switchTurn()
+	getWinner()
 	render()
 	
 }
@@ -83,7 +83,6 @@ function handleClick(evt) {
     } else {
       messageInH2.textContent = "X, mark your spot!"
     }
-		getWinner()
   }
 
   function getWinner() {
@@ -108,9 +107,11 @@ function handleClick(evt) {
 	}
 }
 function replay(evt) {
-	
+	for (let i = 0; i < squareArr.length; i++) {
+		squareArr[i].textContent = ""
 }
-			
+init()
+}			
 
 	
 
