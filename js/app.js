@@ -97,8 +97,7 @@ function handleClick(evt) {
   }
 
   function getWinner() {
-		const tie = gameBoard.every(elem =>
-			elem !== null)
+		const tie = gameBoard.every(elem => elem !== null)
    	for(let i = 0; i < winningCombos.length; i++) {
 		if(gameBoard[winningCombos[i][0]] + gameBoard[winningCombos[i][1]] + gameBoard[winningCombos[i][2]] === 3){
 			console.log("X won")
@@ -125,7 +124,6 @@ function replay(evt) {
 		squareArr[i].style.background = ""
 		confetti.stop()
 }
-
 init()
 }			
 
