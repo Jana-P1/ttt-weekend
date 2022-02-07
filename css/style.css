@@ -1,5 +1,5 @@
 body {
-    background-color: #1F618D ;
+    background-color: #884EA0;
 	/* Use a system font, if none are available use an available sans-sarif   font */
 	font-family: 'Ubuntu', sans-serif;
   color: #E5E7E9;
@@ -9,6 +9,7 @@ body {
   flex-direction: column;
   text-align: center;
 }
+
 
 section.board {
   display: grid;
@@ -22,26 +23,67 @@ section.board {
 }
 
 div {
-  background-color: #D0D3D4  ;
+  background-color: #F7F9F9;
   border: 2px solid #707B7C;
   font-size: 8vmin;
   text-align: center;
   vertical-align: middle;
   box-shadow: 0 -5px 3px -3px black, 0 5px 3px -3px black;
+  border-radius: 10px;
   
 
   
 }
 button {
-  border: 1px solid #fa5a38;
-  margin: 10px 300px 10px 300px;
+  border: 1px solid #4D5656;
+  font-size: 20px;
+  margin: 50px 400px 50px 400px;
   color: whitesmoke;
-  background-color: #FA5A38;
+  background-color: #4D5656;
   display: inline;
   position: sticky;
-  left: auto;
-  right: 20;
-  bottom: 300px;
+  left: 300px;
+  right: 300px;
+  bottom: 200px;
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  border-radius: 10px;
+  }
+  button:hover {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
   
+  @keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+  
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+  
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
 
+h1 {
+  font-size: 75px;
+}
+
+h2 {
+  font-size: 40px;
+}
+
+h3 {
+  font-size: 30px;
 }

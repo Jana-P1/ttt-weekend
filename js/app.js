@@ -8,7 +8,9 @@ winningCombos = [
   [6, 7, 8],
   [0, 3, 6],
   [1, 4, 7],
-  [2, 5, 8]
+  [2, 5, 8],
+	[0, 4, 8],
+	[2, 4, 6]
 ]
 
 
@@ -26,9 +28,7 @@ const squareArr = document.querySelectorAll(".square")
 const messageInH2 = document.getElementById("message")  
 const resetBtn = document.getElementById("reset-btn")
 const grid = document.querySelector("#board")
-const messageInH3 = document.getElementById("message-h3")
-const messageInH4 = document.getElementById("message-h4")
-const allMessages = document.querySelectorAll("info")
+const messageInH3 = document.getElementById("message-two")
 
 /*----------------------------- Event Listeners -----------------------------*/
 squareArr.forEach(square => square.addEventListener("click", handleClick))
@@ -45,7 +45,8 @@ resetBtn.addEventListener("click", replay)
 function init() {
   messageInH2.textContent = "Let's play!"
   gameBoard = [null, null, null, null, null, null, null, null, null]
-  turn = 1
+	messageInH3.textContent = "You're up, X"
+	turn = 1
   isWinner = null;
   render();
 }
@@ -55,11 +56,13 @@ function render() {
   gameBoard.forEach((square, index) => {
     if(gameBoard[index] === 1) {
       squareArr[index].textContent = "X"
-			squareArr[index].style.color = "gray"
-			squareArr[index].style.background = "#F7DC6F"
+			squareArr[index].style.color = "black"
+			squareArr[index].style.background = "#3498DB"
 
     } else if(gameBoard[index] === -1) {
       squareArr[index].textContent = "O"
+			squareArr[index].style.color = "white"
+			squareArr[index].style.background = "#F1C40F "
     }
   })
 }
@@ -84,7 +87,9 @@ function handleClick(evt) {
     // change the the player after each turn
     // prompt the next player to place their mark on the board
     turn *= -1
+		
     if(turn === -1){
+			messageInH3.textContent = ""
       messageInH2.textContent = "Let's go, 0!"
     } else {
       messageInH2.textContent = "X, mark your spot!"
@@ -99,14 +104,16 @@ function handleClick(evt) {
 			console.log("X won")
 			isWinner = player1
 			messageInH2.textContent = "Winner winner chicken dinner! Way to go, X"
+			confetti.start()
 		} else if(gameBoard[winningCombos[i][0]] + gameBoard[winningCombos[i][1]] + gameBoard[winningCombos[i][2]] === -3){
 			console.log("O won")
 			isWinner = player2
 			messageInH2.textContent = "Winner winner chicken dinner! Great job, 0"
+			confetti.start()
 		} else if (tie) {
 			// console.log("tie")
 			isWinner = "T"
-			messageInH2.textContent = "Hey look! It's a tie"
+			messageInH2.textContent = "Hey look! It's a tie...womp womp"
 		} else{
 				isWinner = null
 		}
@@ -115,14 +122,12 @@ function handleClick(evt) {
 function replay(evt) {
 	for (let i = 0; i < squareArr.length; i++) {
 		squareArr[i].textContent = ""
+		squareArr[i].style.background = ""
+		confetti.stop()
 }
+
 init()
 }			
-function removeMessages() {
-	messageInH3.textContent = ""
-	messageInH4.textContent = ""
-}
-	
 
 
 
