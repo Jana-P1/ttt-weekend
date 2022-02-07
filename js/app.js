@@ -25,7 +25,10 @@ let nextTurn, isWinner, gameBoard
 const squareArr = document.querySelectorAll(".square")
 const messageInH2 = document.getElementById("message")  
 const resetBtn = document.getElementById("reset-btn")
-
+const grid = document.querySelector("#board")
+const messageInH3 = document.getElementById("message-h3")
+const messageInH4 = document.getElementById("message-h4")
+const allMessages = document.querySelectorAll("info")
 
 /*----------------------------- Event Listeners -----------------------------*/
 squareArr.forEach(square => square.addEventListener("click", handleClick))
@@ -40,9 +43,8 @@ resetBtn.addEventListener("click", replay)
 // Initialize Function
 
 function init() {
-  messageInH2.textContent = "Let's play! Place your mark on the board. The first player to get three in a row horizontally, diagonally, or vertically wins!"
+  messageInH2.textContent = "Let's play!"
   gameBoard = [null, null, null, null, null, null, null, null, null]
-	console.log(gameBoard)
   turn = 1
   isWinner = null;
   render();
@@ -53,6 +55,9 @@ function render() {
   gameBoard.forEach((square, index) => {
     if(gameBoard[index] === 1) {
       squareArr[index].textContent = "X"
+			squareArr[index].style.color = "gray"
+			squareArr[index].style.background = "#F7DC6F"
+
     } else if(gameBoard[index] === -1) {
       squareArr[index].textContent = "O"
     }
@@ -72,6 +77,7 @@ function handleClick(evt) {
 	getWinner()
 	render()
 	
+	
 }
 
   function switchTurn() {
@@ -86,8 +92,8 @@ function handleClick(evt) {
   }
 
   function getWinner() {
-		const tie = gameBoard.every(elem => {
-			elem !== null})
+		const tie = gameBoard.every(elem =>
+			elem !== null)
    	for(let i = 0; i < winningCombos.length; i++) {
 		if(gameBoard[winningCombos[i][0]] + gameBoard[winningCombos[i][1]] + gameBoard[winningCombos[i][2]] === 3){
 			console.log("X won")
@@ -98,7 +104,7 @@ function handleClick(evt) {
 			isWinner = player2
 			messageInH2.textContent = "Winner winner chicken dinner! Great job, 0"
 		} else if (tie) {
-			console.log("tie")
+			// console.log("tie")
 			isWinner = "T"
 			messageInH2.textContent = "Hey look! It's a tie"
 		} else{
@@ -112,7 +118,10 @@ function replay(evt) {
 }
 init()
 }			
-
+function removeMessages() {
+	messageInH3.textContent = ""
+	messageInH4.textContent = ""
+}
 	
 
 
